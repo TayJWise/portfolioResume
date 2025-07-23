@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hand Detection – Taylor Wise</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf3e0;
+      --text: #3e2c1c;
+      --accent: #d77a42;
+      --card-bg: #fffaf3;
+      --link: #b04a1f;
+    }
+
+    body.dark-mode {
+      --bg: #1f1b16;
+      --text: #f0e7dc;
+      --accent: #a65e2e;
+      --card-bg: #2a241e;
+      --link: #ffa35c;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'EB Garamond', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8em;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 0.9em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .nav-btn.secondary {
+      background: #555;
+    }
+
+    .section {
+      background: var(--card-bg);
+      padding: 20px;
+      margin-bottom: 30px;
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    img.screenshot {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      background: #eee;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-btn secondary">← Back</a>
+    <button class="nav-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  </nav>
+
+  <header>
+    <h1>🖐 Hand Detection</h1>
+    <p>Gesture-based control system using MediaPipe + OpenCV</p>
+  </header>
+
+  <div class="section">
+    <h2>Overview</h2>
+    <p>This project implements a gesture-controlled system using MediaPipe's hand landmark tracking and OpenCV. The user can control volume, video playback, or navigate windows by performing swipe gestures in the air using one or both hands. The system also supports classic rock-paper-scissors recognition.</p>
+  </div>
+
+  <div class="section">
+    <h2>Key Features</h2>
+    <ul>
+      <li>MediaPipe for real-time hand tracking</li>
+      <li>Full-hand swipe detection logic</li>
+      <li>Custom motion filtering for dynamic gesture capture</li>
+      <li>Modular design for extending gesture-based actions</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Demo Video</h2>
+    <video controls style="width: 100%; max-width: 600px; display: block; margin: 0 auto; border-radius: 10px;">
+      <source src="rockPaperScissorsDemo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="section">
+    <h2>Component Breakdown</h2>
+    <p>Here’s a simplified snippet showing how MediaPipe is used to track hands and interpret gestures:</p>
+    <pre><code>def recognize_gesture(landmarks):
+      landmarks = normalize_landmarks(landmarks)
+      distances = {}
+      for gesture, refs in GESTURES.items():
+          if not refs:
+              continue
+          gesture_distances = [euclidean(landmarks, ref) for ref in refs]
+          distances[gesture] = sorted(gesture_distances)[:3]
+  
+      averaged = {g: np.mean(d) for g, d in distances.items()}
+      best = min(averaged, key=averaged.get)
+      sorted_vals = sorted(averaged.values())
+  
+      if len(sorted_vals) > 1 and sorted_vals[0] / sorted_vals[1] > 0.85:
+          return "Unknown", sorted_vals[0]
+  
+      return best, averaged[best]</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Screenshot</h2>
+    <img src="interface.png" alt="Screenshot of gesture interface" class="screenshot" />
+  </div>
+
+  <div class="section">
+    <h2>GitHub</h2>
+    <p>View full source code on <a href="https://github.com/TayJWise/hand_detection" target="_blank">GitHub →</a></p>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+</body>
+</html>

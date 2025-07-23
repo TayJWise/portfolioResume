@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taylor Wise – Autumn Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf3e0;
+      --text: #3e2c1c;
+      --accent: #d77a42;
+      --card-bg: #fffaf3;
+      --link: #b04a1f;
+    }
+
+    body.dark-mode {
+      --bg: #1f1b16;
+      --text: #f0e7dc;
+      --accent: #a65e2e;
+      --card-bg: #2a241e;
+      --link: #ffa35c;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'EB Garamond', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    header {
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3em;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      margin: 15px auto;
+      display: block;
+    }
+
+    h2 {
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 3px;
+      margin-top: 40px;
+    }
+
+    .section {
+      background: var(--card-bg);
+      border-left: 5px solid var(--accent);
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 8px;
+    }
+
+    .contact {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: var(--accent);
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: grey;
+    }
+
+    .card-caption {
+      padding: 15px;
+    }
+
+    .button-panel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .toggle-btn, .resume-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 0.9em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .resume-btn {
+      background: #555;
+    }
+
+    @media (max-width: 600px) {
+      .button-panel {
+        flex-direction: row;
+        bottom: 20px;
+        top: auto;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="button-panel">
+    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <a href="your-resume.pdf" class="resume-btn" download>Download PDF Resume</a>
+  </div>
+
+  <header>
+    <img src="picSelf.png" alt="Taylor Wise" class="profile-pic">
+    <h1>Taylor Wise</h1>
+    <p class="subtitle">CS @ University of Oklahoma | B.S. '26 + M.S. '27 | Cozy Code + Gilmore Energy</p>
+  </header>
+
+  <h2>About Me</h2>
+  <div class="section">
+    <p>
+      I'm a computer science student at the University of Oklahoma, graduating with my B.S. in May 2026 and my M.S. in May 2027. I code like I’m writing in a journal at a small-town bookstore café. I build projects that blend logic and creativity—especially in AI, vision, and cybersecurity. If you're looking for someone who thinks deeply and builds creatively? I’m your girl.
+    </p>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="projects">
+    <a href="handDetection.html" class="card">
+      <div class="card-caption">
+        <h3>🖐 Hand Detection</h3>
+        <p>Real-time gesture system using MediaPipe + OpenCV to detect and play rock-paper scissors with computer. Additional aspects include gestures for controlling volume, video, and currently displayed window. Supports airdrawing and picture saving.</p>
+      </div>
+    </a>
+    <a href="https://github.com/CS3203-Group-i/oucs3203groupi" class="card">
+      <div class="card-caption">
+        <h3>📅 OU Class Scheduler</h3>
+        <p>Filtered 1000+ OU courses and supported PDF uploads for class selection into Gemini API query flowchart generation.</p>
+      </div>
+    </a>
+    <a href="https://github.com/computer-security-trio/final-project" class="card">
+      <div class="card-caption">
+        <h3>🔐 Secure Messaging</h3>
+        <p>Encrypted messaging across shared container.</p>
+      </div>
+    </a>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="section">
+    <p><strong>Languages:</strong> Java, Python, C++, R, Bash, PowerShell</p>
+    <p><strong>Tools:</strong> Git Actions, Git App, CI/CD, Azure, Streamlit, Conda, Gemini API, MediaPipe, OpenCV, WellView</p>
+  </div>
+
+  <h2>Experience</h2>
+  <div class="section">
+    <p><strong>Data Engineering Intern @ ConocoPhillips</strong> (May 2025 – July 2025)</p>
+    <ul>
+      <li>Accelerated data integration for 100+ Gas Lift wells on Gas Lift Surveillance & Optimization team</li>
+      <li>Provided enhancements to data loader based on tubing string installation date, mandrels, and lift type </li>
+      <li>Created common source data in Wellview with Informatica and Bash based on prior Oracle databases </li>
+    </ul>
+    <p><strong>Data Engineering Intern @ ConocoPhillips</strong> (May 2024 – July 2024)</p>
+    <ul>
+      <li>Extracted 500+ Python imports from AST repositories</li>
+      <li>Automated repo scanning using GitHub Actions, PowerShell, and Git App</li>
+      <li>Built Azure CI/CD pipeline for dataset import automation</li>
+      <li>Created Streamlit interface for visualizing localization/sensitivity across imports</li>
+    </ul>
+  </div>
+
+  <h2>Research</h2>
+  <div class="section">
+    <p><strong>Undergraduate Researcher @ Maiti SecretLab OU</strong> (January 2025 – Present)</p>
+    <ul>
+      <li>Automated deployment of 200k+ AI requests in Python to analyze bias in pre-existing models</li>
+      <li>Built retry logic for invalid outputs and exponential retries from internet issues to improve reliability</li>
+      <li>Analyzed model bias against specific companies based on temperature, role, and prompt variation</li>
+    </ul>
+    <p><strong>Undergraduate Researcher @ Maiti SecretLab OU</strong> (August 2024 – December 2024)</p>
+    <ul>
+      <li>Developed Bash scripts to automate deployment of over 20 AI workloads</li>
+      <li>Created self-cleaning script to install and later wipe Conda environment between loads to save storage</li>
+    </ul>
+    <p><strong>FYRE Undergraduate Researcher @ McCall Lab OU</strong> (January 2023 – May 2023)</p>
+    <ul>
+      <li>Developed categorized separation of large datasets for QIIME2 on Jupyter Notebook</li>
+      <li>Incorporated Bash so datasets are inserted into QIIME2 to prevent retyping 25+ file names each time</li>
+      <li>Utilized Agile methodology in weekly meetings and presented updates for reliability</li>
+    </ul>
+  </div>
+
+  <h2>Leadership</h2>
+  <div class="section">
+    <p><strong>President + Founder, Member @ Cybersecurity Club</strong> (May 2024 – Present)</p>
+    <ul>
+      <li>Spearheaded cybersecurity club at OU and gained over 40 members within Fall 2024 – Spring 2025</li>
+      <li>Led undergraduate student involvement in OU’s first CANSec Capture-The-Flag competition</li>
+    </ul>
+    <p><strong>Vice President, Member @ Society of Women Engineers</strong> (May 2025 – Present)</p>
+    <ul>
+      <li>Organizing club events to inspire 100+ members within College of Engineering</li>
+      <li>Supporting officers’ roles based on past presidential, financial, and operational leadership positions</li>
+    </ul>
+    <p><strong>Vice President of Operations @ Alpha Sigma Kappa</strong> (January 2024 – December 2024)</p>
+    <ul>
+      <li>Operated the Chapter’s Judiciary Board to ensure organization’s integrity</li>
+      <li>Managed and updated over 50 Chapter documents to maintain consistency</li>
+    </ul>
+  </div>
+
+  <div class="contact">
+    <p>
+      🍂 <a href="mailto:taylorjwise1@gmail.com">taylorjwise1@gmail.com</a> |
+      <a href="https://github.com/TayJWise" target="_blank">GitHub</a>
+    </p>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+</body>
+</html>
